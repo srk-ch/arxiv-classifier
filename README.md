@@ -5,7 +5,6 @@ An AI-powered web application that automatically classifies research papers into
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Flask](https://img.shields.io/badge/Flask-2.0+-green.svg)
 ![CatBoost](https://img.shields.io/badge/CatBoost-ML-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## ✨ Features
 
@@ -406,7 +405,7 @@ DOMAIN_KEYWORDS = {
 ### Training Performance
 
 **Expected Results:**
-- Training Time: 6-8 minutes total
+- Training Time: 20-30 minutes total
 - Final Accuracy: ~87-90% on test set
 - Model Size: ~50-100 MB (all 3 files combined)
 
@@ -490,7 +489,7 @@ For questions or feedback, reach out to:
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the CC BY-ND - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
@@ -519,150 +518,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [ ] A/B testing for model improvements
 - [ ] Docker containerization for easy deployment
 
-## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
 
-### Ways to Contribute
 
-1. **Improve the Model**
-   - Add more training data
-   - Experiment with different ML algorithms
-   - Optimize hyperparameters
-   - Share your trained models
 
-2. **Enhance Features**
-   - Add new categories
-   - Improve UI/UX
-   - Add data visualizations
-   - Implement new features
-
-3. **Fix Bugs**
-   - Report issues
-   - Submit bug fixes
-   - Improve error handling
-
-4. **Documentation**
-   - Improve README
-   - Add code comments
-   - Create tutorials
-   - Translate documentation
-
-### Contribution Process
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Model Training Contributions
-
-If you've trained a better model:
-1. Share your training notebook with improvements
-2. Document your approach and parameters
-3. Include performance metrics comparison
-4. Submit model files with detailed description
-
-## 📈 Model Performance
-
-### Current Model Metrics
-
-- **Overall Accuracy**: 87.56%
-- **Training Data**: 15,000 arXiv papers (3,000 per category)
-- **Architecture**: Hybrid CatBoost with TF-IDF (15,000 features) + Domain Keywords (50+ per category)
-- **Training Time**: 6-8 minutes on Google Colab
-- **Model Parameters**:
-  - Iterations: 400
-  - Learning Rate: 0.15
-  - Tree Depth: 6
-  - Early Stopping: 50 rounds
-
-### Feature Engineering
-
-**Hybrid Approach:**
-1. **TF-IDF Features** (15,000 dimensions)
-   - Bigrams (1-2 word combinations)
-   - Sublinear TF scaling
-   - Min document frequency: 2
-   - Max document frequency: 95%
-
-2. **Domain-Specific Keywords** (5 dimensions)
-   - 50+ keywords per category
-   - Captures field-specific terminology
-   - Examples: "neural network" (AI), "quantum entanglement" (Physics)
-
-### Performance by Category
-
-| Category | Training Papers | Keywords | Estimated Accuracy |
-|----------|----------------|----------|-------------------|
-| AI & ML | 3,000 | 16 keywords | ~89% |
-| Physics | 3,000 | 14 keywords | ~85% |
-| Mathematics | 3,000 | 14 keywords | ~88% |
-| Biology & Health | 3,000 | 14 keywords | ~87% |
-| Chemistry & Materials | 3,000 | 10 keywords | ~89% |
-
-*Note: Run the training notebook to get exact metrics for your trained model*
-
-### Improving Model Accuracy
-
-Want better results? Try these approaches:
-
-**1. Increase Training Data**
-```python
-target_per_class = 5000  # From 3000 → better generalization
-```
-
-**2. More Iterations**
-```python
-iterations=800  # From 400 → more learning (takes longer)
-```
-
-**3. Deeper Trees**
-```python
-depth=8  # From 6 → capture more complex patterns
-```
-
-**4. Add More Keywords**
-```python
-# Add domain-specific terms you notice in misclassifications
-DOMAIN_KEYWORDS['AI_ML'].extend(['bert', 'gpt', 'llm', 'embedding'])
-```
-
-**5. Tune TF-IDF**
-```python
-max_features=20000  # From 15000 → richer vocabulary
-ngram_range=(1,3)   # From (1,2) → include trigrams
-```
-
-### Training Data Breakdown
-
-**Total Dataset**: 15,000 papers
-- Training: 10,500 papers (70%)
-- Validation: 2,250 papers (15%)
-- Test: 2,250 papers (15%)
-
-**Category Distribution** (balanced):
-- AI & ML: 3,000 papers
-- Physics: 3,000 papers
-- Mathematics: 3,000 papers
-- Biology & Health: 3,000 papers
-- Chemistry & Materials: 3,000 papers
-
-### Text Preprocessing
-
-The model uses aggressive cleaning:
-```python
-def clean_text(text):
-    - Remove LaTeX math: $equation$
-    - Remove LaTeX commands: \command
-    - Keep only letters and spaces
-    - Convert to lowercase
-    - Remove extra whitespace
-```
-
-This ensures robust classification even with complex academic notation!
-
----
-
-**Made with ❤️ by the arXiv Classifier Team**
